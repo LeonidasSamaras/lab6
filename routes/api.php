@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\API\UsersController;
 use \App\Http\Controllers\API\SkillsController;
 use \App\Http\Controllers\API\UsersSkillsController;
-
+use \App\Http\Controllers\UsersVacationsController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,5 +21,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::apiResource('/users', UsersController::class, ['only' => ['index', 'show', 'store', 'update', 'destroy']]);
-Route::apiResource('/skills', SkillsController::class, ['only' => ['index']]);
-Route::apiResource('/users/{id}/skills', UsersSkillsController::class, ['only' => ['index']]);
+Route::apiResource('/skills', SkillsController::class, ['only' => ['index', 'store', 'update', 'destroy']]);
+Route::apiResource('/users/{id}/skills', UsersSkillsController::class, ['only' => ['index', 'store']]);
+Route::apiResource('/users/{id}/vacations', UsersVacationsController::class, ['only' => ['index', 'show', 'store', 'update', 'destroy']]);

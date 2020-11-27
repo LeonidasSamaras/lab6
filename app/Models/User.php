@@ -44,15 +44,23 @@ class User extends Authenticatable
 
     protected $appends = ['fullName'];
 
-    public function setPasswordAttribute($value) {
+    public function setPasswordAttribute($value)
+    {
         $this->attributes['password'] = bcrypt($value);
     }
 
-    public function getFullNameAttribute() {
+    public function getFullNameAttribute()
+    {
         return "{$this->attributes['firstName']} {$this->attributes['lastName']}";
     }
 
-    public function skills() {
+    public function skills()
+    {
         return $this->belongsToMany(Skill::class, 'users_skills');
+    }
+
+    public function vacations()
+    {
+        return $this->hasMany('App\Models\Vacation');
     }
 }
